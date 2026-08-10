@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ShellRouteImport } from './routes/_shell'
 import { Route as ShellIndexRouteImport } from './routes/_shell.index'
+import { Route as ShellActivationsRouteImport } from './routes/_shell.activations'
 import { Route as ShellGenerateQrRouteImport } from './routes/_shell.generate-qr'
 import { Route as ShellSessionsRouteImport } from './routes/_shell.sessions'
 import { Route as ShellQrCodesIndexRouteImport } from './routes/_shell.qr-codes.index'
@@ -27,6 +28,11 @@ const ShellRoute = ShellRouteImport.update({
 const ShellIndexRoute = ShellIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellActivationsRoute = ShellActivationsRouteImport.update({
+  id: '/activations',
+  path: '/activations',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellGenerateQrRoute = ShellGenerateQrRouteImport.update({
@@ -72,6 +78,7 @@ const ShellUsersUserIdRoute = ShellUsersUserIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof ShellIndexRoute
+  '/activations': typeof ShellActivationsRoute
   '/generate-qr': typeof ShellGenerateQrRoute
   '/sessions': typeof ShellSessionsRoute
   '/qr-codes/$qrId': typeof ShellQrCodesQrIdRoute
@@ -82,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/users/': typeof ShellUsersIndexRoute
 }
 export interface FileRoutesByTo {
+  '/activations': typeof ShellActivationsRoute
   '/generate-qr': typeof ShellGenerateQrRoute
   '/sessions': typeof ShellSessionsRoute
   '/': typeof ShellIndexRoute
@@ -95,6 +103,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_shell': typeof ShellRouteWithChildren
+  '/_shell/activations': typeof ShellActivationsRoute
   '/_shell/generate-qr': typeof ShellGenerateQrRoute
   '/_shell/sessions': typeof ShellSessionsRoute
   '/_shell/': typeof ShellIndexRoute
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/activations'
     | '/generate-qr'
     | '/sessions'
     | '/qr-codes/$qrId'
@@ -119,6 +129,7 @@ export interface FileRouteTypes {
     | '/users/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/activations'
     | '/generate-qr'
     | '/sessions'
     | '/'
@@ -131,6 +142,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_shell'
+    | '/_shell/activations'
     | '/_shell/generate-qr'
     | '/_shell/sessions'
     | '/_shell/'
@@ -160,6 +172,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof ShellIndexRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/activations': {
+      id: '/_shell/activations'
+      path: '/activations'
+      fullPath: '/activations'
+      preLoaderRoute: typeof ShellActivationsRouteImport
       parentRoute: typeof ShellRoute
     }
     '/_shell/generate-qr': {
@@ -222,6 +241,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface ShellRouteChildren {
+  ShellActivationsRoute: typeof ShellActivationsRoute
   ShellGenerateQrRoute: typeof ShellGenerateQrRoute
   ShellSessionsRoute: typeof ShellSessionsRoute
   ShellIndexRoute: typeof ShellIndexRoute
@@ -234,6 +254,7 @@ interface ShellRouteChildren {
 }
 
 const ShellRouteChildren: ShellRouteChildren = {
+  ShellActivationsRoute: ShellActivationsRoute,
   ShellGenerateQrRoute: ShellGenerateQrRoute,
   ShellSessionsRoute: ShellSessionsRoute,
   ShellIndexRoute: ShellIndexRoute,
