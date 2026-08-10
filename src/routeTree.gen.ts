@@ -15,6 +15,7 @@ import { Route as ShellActivationsRouteImport } from './routes/_shell.activation
 import { Route as ShellGenerateQrRouteImport } from './routes/_shell.generate-qr'
 import { Route as ShellSessionsRouteImport } from './routes/_shell.sessions'
 import { Route as ShellBatchesIndexRouteImport } from './routes/_shell.batches.index'
+import { Route as ShellBatchesBatchIdRouteImport } from './routes/_shell.batches.$batchId'
 import { Route as ShellQrCodesIndexRouteImport } from './routes/_shell.qr-codes.index'
 import { Route as ShellQrCodesQrIdRouteImport } from './routes/_shell.qr-codes.$qrId'
 import { Route as ShellRolesIndexRouteImport } from './routes/_shell.roles.index'
@@ -49,6 +50,11 @@ const ShellSessionsRoute = ShellSessionsRouteImport.update({
 const ShellBatchesIndexRoute = ShellBatchesIndexRouteImport.update({
   id: '/batches/',
   path: '/batches/',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellBatchesBatchIdRoute = ShellBatchesBatchIdRouteImport.update({
+  id: '/batches/$batchId',
+  path: '/batches/$batchId',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellQrCodesIndexRoute = ShellQrCodesIndexRouteImport.update({
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/activations': typeof ShellActivationsRoute
   '/generate-qr': typeof ShellGenerateQrRoute
   '/sessions': typeof ShellSessionsRoute
+  '/batches/$batchId': typeof ShellBatchesBatchIdRoute
   '/qr-codes/$qrId': typeof ShellQrCodesQrIdRoute
   '/roles/$roleId': typeof ShellRolesRoleIdRoute
   '/users/$userId': typeof ShellUsersUserIdRoute
@@ -100,6 +107,7 @@ export interface FileRoutesByTo {
   '/generate-qr': typeof ShellGenerateQrRoute
   '/sessions': typeof ShellSessionsRoute
   '/': typeof ShellIndexRoute
+  '/batches/$batchId': typeof ShellBatchesBatchIdRoute
   '/qr-codes/$qrId': typeof ShellQrCodesQrIdRoute
   '/roles/$roleId': typeof ShellRolesRoleIdRoute
   '/users/$userId': typeof ShellUsersUserIdRoute
@@ -115,6 +123,7 @@ export interface FileRoutesById {
   '/_shell/generate-qr': typeof ShellGenerateQrRoute
   '/_shell/sessions': typeof ShellSessionsRoute
   '/_shell/': typeof ShellIndexRoute
+  '/_shell/batches/$batchId': typeof ShellBatchesBatchIdRoute
   '/_shell/qr-codes/$qrId': typeof ShellQrCodesQrIdRoute
   '/_shell/roles/$roleId': typeof ShellRolesRoleIdRoute
   '/_shell/users/$userId': typeof ShellUsersUserIdRoute
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
     | '/activations'
     | '/generate-qr'
     | '/sessions'
+    | '/batches/$batchId'
     | '/qr-codes/$qrId'
     | '/roles/$roleId'
     | '/users/$userId'
@@ -143,6 +153,7 @@ export interface FileRouteTypes {
     | '/generate-qr'
     | '/sessions'
     | '/'
+    | '/batches/$batchId'
     | '/qr-codes/$qrId'
     | '/roles/$roleId'
     | '/users/$userId'
@@ -157,6 +168,7 @@ export interface FileRouteTypes {
     | '/_shell/generate-qr'
     | '/_shell/sessions'
     | '/_shell/'
+    | '/_shell/batches/$batchId'
     | '/_shell/qr-codes/$qrId'
     | '/_shell/roles/$roleId'
     | '/_shell/users/$userId'
@@ -214,6 +226,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellBatchesIndexRouteImport
       parentRoute: typeof ShellRoute
     }
+    '/_shell/batches/$batchId': {
+      id: '/_shell/batches/$batchId'
+      path: '/batches/$batchId'
+      fullPath: '/batches/$batchId'
+      preLoaderRoute: typeof ShellBatchesBatchIdRouteImport
+      parentRoute: typeof ShellRoute
+    }
     '/_shell/qr-codes/': {
       id: '/_shell/qr-codes/'
       path: '/qr-codes'
@@ -264,6 +283,7 @@ interface ShellRouteChildren {
   ShellGenerateQrRoute: typeof ShellGenerateQrRoute
   ShellSessionsRoute: typeof ShellSessionsRoute
   ShellIndexRoute: typeof ShellIndexRoute
+  ShellBatchesBatchIdRoute: typeof ShellBatchesBatchIdRoute
   ShellQrCodesQrIdRoute: typeof ShellQrCodesQrIdRoute
   ShellRolesRoleIdRoute: typeof ShellRolesRoleIdRoute
   ShellUsersUserIdRoute: typeof ShellUsersUserIdRoute
@@ -278,6 +298,7 @@ const ShellRouteChildren: ShellRouteChildren = {
   ShellGenerateQrRoute: ShellGenerateQrRoute,
   ShellSessionsRoute: ShellSessionsRoute,
   ShellIndexRoute: ShellIndexRoute,
+  ShellBatchesBatchIdRoute: ShellBatchesBatchIdRoute,
   ShellQrCodesQrIdRoute: ShellQrCodesQrIdRoute,
   ShellRolesRoleIdRoute: ShellRolesRoleIdRoute,
   ShellUsersUserIdRoute: ShellUsersUserIdRoute,
