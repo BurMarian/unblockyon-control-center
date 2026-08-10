@@ -23,7 +23,7 @@ export const Route = createFileRoute("/_shell/settings/administration")({
 });
 
 function AdministrationSettingsPage() {
-  const admins = users.filter((u) => u.role === "Super Admin" || u.role === "Admin").slice(0, 5);
+  const admins = users.filter((u) => u.role === "Superadmin" || u.role === "Admin").slice(0, 5);
 
   return (
     <div className="space-y-6">
