@@ -14,6 +14,9 @@ import { Route as ShellIndexRouteImport } from './routes/_shell.index'
 import { Route as ShellActivationsRouteImport } from './routes/_shell.activations'
 import { Route as ShellGenerateQrRouteImport } from './routes/_shell.generate-qr'
 import { Route as ShellNotificationsRouteImport } from './routes/_shell.notifications'
+import { Route as ShellPaymentsRouteImport } from './routes/_shell.payments'
+import { Route as ShellPlansRouteImport } from './routes/_shell.plans'
+import { Route as ShellRevenueRouteImport } from './routes/_shell.revenue'
 import { Route as ShellSessionsRouteImport } from './routes/_shell.sessions'
 import { Route as ShellTelegramRouteImport } from './routes/_shell.telegram'
 import { Route as ShellTemplatesRouteImport } from './routes/_shell.templates'
@@ -48,6 +51,21 @@ const ShellGenerateQrRoute = ShellGenerateQrRouteImport.update({
 const ShellNotificationsRoute = ShellNotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellPaymentsRoute = ShellPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellPlansRoute = ShellPlansRouteImport.update({
+  id: '/plans',
+  path: '/plans',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellRevenueRoute = ShellRevenueRouteImport.update({
+  id: '/revenue',
+  path: '/revenue',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellSessionsRoute = ShellSessionsRouteImport.update({
@@ -111,6 +129,9 @@ export interface FileRoutesByFullPath {
   '/activations': typeof ShellActivationsRoute
   '/generate-qr': typeof ShellGenerateQrRoute
   '/notifications': typeof ShellNotificationsRoute
+  '/payments': typeof ShellPaymentsRoute
+  '/plans': typeof ShellPlansRoute
+  '/revenue': typeof ShellRevenueRoute
   '/sessions': typeof ShellSessionsRoute
   '/telegram': typeof ShellTelegramRoute
   '/templates': typeof ShellTemplatesRoute
@@ -127,6 +148,9 @@ export interface FileRoutesByTo {
   '/activations': typeof ShellActivationsRoute
   '/generate-qr': typeof ShellGenerateQrRoute
   '/notifications': typeof ShellNotificationsRoute
+  '/payments': typeof ShellPaymentsRoute
+  '/plans': typeof ShellPlansRoute
+  '/revenue': typeof ShellRevenueRoute
   '/sessions': typeof ShellSessionsRoute
   '/telegram': typeof ShellTelegramRoute
   '/templates': typeof ShellTemplatesRoute
@@ -146,6 +170,9 @@ export interface FileRoutesById {
   '/_shell/activations': typeof ShellActivationsRoute
   '/_shell/generate-qr': typeof ShellGenerateQrRoute
   '/_shell/notifications': typeof ShellNotificationsRoute
+  '/_shell/payments': typeof ShellPaymentsRoute
+  '/_shell/plans': typeof ShellPlansRoute
+  '/_shell/revenue': typeof ShellRevenueRoute
   '/_shell/sessions': typeof ShellSessionsRoute
   '/_shell/telegram': typeof ShellTelegramRoute
   '/_shell/templates': typeof ShellTemplatesRoute
@@ -166,6 +193,9 @@ export interface FileRouteTypes {
     | '/activations'
     | '/generate-qr'
     | '/notifications'
+    | '/payments'
+    | '/plans'
+    | '/revenue'
     | '/sessions'
     | '/telegram'
     | '/templates'
@@ -182,6 +212,9 @@ export interface FileRouteTypes {
     | '/activations'
     | '/generate-qr'
     | '/notifications'
+    | '/payments'
+    | '/plans'
+    | '/revenue'
     | '/sessions'
     | '/telegram'
     | '/templates'
@@ -200,6 +233,9 @@ export interface FileRouteTypes {
     | '/_shell/activations'
     | '/_shell/generate-qr'
     | '/_shell/notifications'
+    | '/_shell/payments'
+    | '/_shell/plans'
+    | '/_shell/revenue'
     | '/_shell/sessions'
     | '/_shell/telegram'
     | '/_shell/templates'
@@ -253,6 +289,27 @@ declare module '@tanstack/react-router' {
       path: '/notifications'
       fullPath: '/notifications'
       preLoaderRoute: typeof ShellNotificationsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/payments': {
+      id: '/_shell/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof ShellPaymentsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/plans': {
+      id: '/_shell/plans'
+      path: '/plans'
+      fullPath: '/plans'
+      preLoaderRoute: typeof ShellPlansRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/revenue': {
+      id: '/_shell/revenue'
+      path: '/revenue'
+      fullPath: '/revenue'
+      preLoaderRoute: typeof ShellRevenueRouteImport
       parentRoute: typeof ShellRoute
     }
     '/_shell/sessions': {
@@ -339,6 +396,9 @@ interface ShellRouteChildren {
   ShellActivationsRoute: typeof ShellActivationsRoute
   ShellGenerateQrRoute: typeof ShellGenerateQrRoute
   ShellNotificationsRoute: typeof ShellNotificationsRoute
+  ShellPaymentsRoute: typeof ShellPaymentsRoute
+  ShellPlansRoute: typeof ShellPlansRoute
+  ShellRevenueRoute: typeof ShellRevenueRoute
   ShellSessionsRoute: typeof ShellSessionsRoute
   ShellTelegramRoute: typeof ShellTelegramRoute
   ShellTemplatesRoute: typeof ShellTemplatesRoute
@@ -357,6 +417,9 @@ const ShellRouteChildren: ShellRouteChildren = {
   ShellActivationsRoute: ShellActivationsRoute,
   ShellGenerateQrRoute: ShellGenerateQrRoute,
   ShellNotificationsRoute: ShellNotificationsRoute,
+  ShellPaymentsRoute: ShellPaymentsRoute,
+  ShellPlansRoute: ShellPlansRoute,
+  ShellRevenueRoute: ShellRevenueRoute,
   ShellSessionsRoute: ShellSessionsRoute,
   ShellTelegramRoute: ShellTelegramRoute,
   ShellTemplatesRoute: ShellTemplatesRoute,
