@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ShellRouteImport } from './routes/_shell'
 import { Route as ShellIndexRouteImport } from './routes/_shell.index'
+import { Route as ShellRolesIndexRouteImport } from './routes/_shell.roles.index'
 import { Route as ShellUsersIndexRouteImport } from './routes/_shell.users.index'
 import { Route as ShellUsersUserIdRouteImport } from './routes/_shell.users.$userId'
 
@@ -21,6 +22,11 @@ const ShellRoute = ShellRouteImport.update({
 const ShellIndexRoute = ShellIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellRolesIndexRoute = ShellRolesIndexRouteImport.update({
+  id: '/roles/',
+  path: '/roles/',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellUsersIndexRoute = ShellUsersIndexRouteImport.update({
@@ -37,11 +43,13 @@ const ShellUsersUserIdRoute = ShellUsersUserIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof ShellIndexRoute
   '/users/$userId': typeof ShellUsersUserIdRoute
+  '/roles/': typeof ShellRolesIndexRoute
   '/users/': typeof ShellUsersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof ShellIndexRoute
   '/users/$userId': typeof ShellUsersUserIdRoute
+  '/roles': typeof ShellRolesIndexRoute
   '/users': typeof ShellUsersIndexRoute
 }
 export interface FileRoutesById {
@@ -49,18 +57,20 @@ export interface FileRoutesById {
   '/_shell': typeof ShellRouteWithChildren
   '/_shell/': typeof ShellIndexRoute
   '/_shell/users/$userId': typeof ShellUsersUserIdRoute
+  '/_shell/roles/': typeof ShellRolesIndexRoute
   '/_shell/users/': typeof ShellUsersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/users/$userId' | '/users/'
+  fullPaths: '/' | '/users/$userId' | '/roles/' | '/users/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/users/$userId' | '/users'
+  to: '/' | '/users/$userId' | '/roles' | '/users'
   id:
     | '__root__'
     | '/_shell'
     | '/_shell/'
     | '/_shell/users/$userId'
+    | '/_shell/roles/'
     | '/_shell/users/'
   fileRoutesById: FileRoutesById
 }
@@ -84,6 +94,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellIndexRouteImport
       parentRoute: typeof ShellRoute
     }
+    '/_shell/roles/': {
+      id: '/_shell/roles/'
+      path: '/roles'
+      fullPath: '/roles/'
+      preLoaderRoute: typeof ShellRolesIndexRouteImport
+      parentRoute: typeof ShellRoute
+    }
     '/_shell/users/': {
       id: '/_shell/users/'
       path: '/users'
@@ -104,12 +121,14 @@ declare module '@tanstack/react-router' {
 interface ShellRouteChildren {
   ShellIndexRoute: typeof ShellIndexRoute
   ShellUsersUserIdRoute: typeof ShellUsersUserIdRoute
+  ShellRolesIndexRoute: typeof ShellRolesIndexRoute
   ShellUsersIndexRoute: typeof ShellUsersIndexRoute
 }
 
 const ShellRouteChildren: ShellRouteChildren = {
   ShellIndexRoute: ShellIndexRoute,
   ShellUsersUserIdRoute: ShellUsersUserIdRoute,
+  ShellRolesIndexRoute: ShellRolesIndexRoute,
   ShellUsersIndexRoute: ShellUsersIndexRoute,
 }
 
