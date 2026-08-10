@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ShellRouteImport } from './routes/_shell'
 import { Route as ShellIndexRouteImport } from './routes/_shell.index'
 import { Route as ShellUsersIndexRouteImport } from './routes/_shell.users.index'
+import { Route as ShellUsersUserIdRouteImport } from './routes/_shell.users.$userId'
 
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
@@ -27,27 +28,40 @@ const ShellUsersIndexRoute = ShellUsersIndexRouteImport.update({
   path: '/users/',
   getParentRoute: () => ShellRoute,
 } as any)
+const ShellUsersUserIdRoute = ShellUsersUserIdRouteImport.update({
+  id: '/users/$userId',
+  path: '/users/$userId',
+  getParentRoute: () => ShellRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof ShellIndexRoute
+  '/users/$userId': typeof ShellUsersUserIdRoute
   '/users/': typeof ShellUsersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof ShellIndexRoute
+  '/users/$userId': typeof ShellUsersUserIdRoute
   '/users': typeof ShellUsersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_shell': typeof ShellRouteWithChildren
   '/_shell/': typeof ShellIndexRoute
+  '/_shell/users/$userId': typeof ShellUsersUserIdRoute
   '/_shell/users/': typeof ShellUsersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/users/'
+  fullPaths: '/' | '/users/$userId' | '/users/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/users'
-  id: '__root__' | '/_shell' | '/_shell/' | '/_shell/users/'
+  to: '/' | '/users/$userId' | '/users'
+  id:
+    | '__root__'
+    | '/_shell'
+    | '/_shell/'
+    | '/_shell/users/$userId'
+    | '/_shell/users/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,16 +91,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellUsersIndexRouteImport
       parentRoute: typeof ShellRoute
     }
+    '/_shell/users/$userId': {
+      id: '/_shell/users/$userId'
+      path: '/users/$userId'
+      fullPath: '/users/$userId'
+      preLoaderRoute: typeof ShellUsersUserIdRouteImport
+      parentRoute: typeof ShellRoute
+    }
   }
 }
 
 interface ShellRouteChildren {
   ShellIndexRoute: typeof ShellIndexRoute
+  ShellUsersUserIdRoute: typeof ShellUsersUserIdRoute
   ShellUsersIndexRoute: typeof ShellUsersIndexRoute
 }
 
 const ShellRouteChildren: ShellRouteChildren = {
   ShellIndexRoute: ShellIndexRoute,
+  ShellUsersUserIdRoute: ShellUsersUserIdRoute,
   ShellUsersIndexRoute: ShellUsersIndexRoute,
 }
 
