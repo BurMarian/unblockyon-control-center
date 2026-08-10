@@ -9,61 +9,584 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as ShellRouteImport } from './routes/_shell'
+import { Route as ShellIndexRouteImport } from './routes/_shell.index'
+import { Route as ShellActivationsRouteImport } from './routes/_shell.activations'
+import { Route as ShellActivityLogsRouteImport } from './routes/_shell.activity-logs'
+import { Route as ShellErrorLogsRouteImport } from './routes/_shell.error-logs'
+import { Route as ShellGenerateQrRouteImport } from './routes/_shell.generate-qr'
+import { Route as ShellNotificationsRouteImport } from './routes/_shell.notifications'
+import { Route as ShellPaymentsRouteImport } from './routes/_shell.payments'
+import { Route as ShellPlansRouteImport } from './routes/_shell.plans'
+import { Route as ShellRevenueRouteImport } from './routes/_shell.revenue'
+import { Route as ShellServicesRouteImport } from './routes/_shell.services'
+import { Route as ShellSessionsRouteImport } from './routes/_shell.sessions'
+import { Route as ShellSystemHealthRouteImport } from './routes/_shell.system-health'
+import { Route as ShellTelegramRouteImport } from './routes/_shell.telegram'
+import { Route as ShellTemplatesRouteImport } from './routes/_shell.templates'
+import { Route as ShellBatchesIndexRouteImport } from './routes/_shell.batches.index'
+import { Route as ShellBatchesBatchIdRouteImport } from './routes/_shell.batches.$batchId'
+import { Route as ShellQrCodesIndexRouteImport } from './routes/_shell.qr-codes.index'
+import { Route as ShellQrCodesQrIdRouteImport } from './routes/_shell.qr-codes.$qrId'
+import { Route as ShellRolesIndexRouteImport } from './routes/_shell.roles.index'
+import { Route as ShellRolesRoleIdRouteImport } from './routes/_shell.roles.$roleId'
+import { Route as ShellSettingsAdministrationRouteImport } from './routes/_shell.settings.administration'
+import { Route as ShellSettingsGeneralRouteImport } from './routes/_shell.settings.general'
+import { Route as ShellSettingsSecurityRouteImport } from './routes/_shell.settings.security'
+import { Route as ShellUsersIndexRouteImport } from './routes/_shell.users.index'
+import { Route as ShellUsersUserIdRouteImport } from './routes/_shell.users.$userId'
 
-const IndexRoute = IndexRouteImport.update({
+const ShellRoute = ShellRouteImport.update({
+  id: '/_shell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShellIndexRoute = ShellIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellActivationsRoute = ShellActivationsRouteImport.update({
+  id: '/activations',
+  path: '/activations',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellActivityLogsRoute = ShellActivityLogsRouteImport.update({
+  id: '/activity-logs',
+  path: '/activity-logs',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellErrorLogsRoute = ShellErrorLogsRouteImport.update({
+  id: '/error-logs',
+  path: '/error-logs',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellGenerateQrRoute = ShellGenerateQrRouteImport.update({
+  id: '/generate-qr',
+  path: '/generate-qr',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellNotificationsRoute = ShellNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellPaymentsRoute = ShellPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellPlansRoute = ShellPlansRouteImport.update({
+  id: '/plans',
+  path: '/plans',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellRevenueRoute = ShellRevenueRouteImport.update({
+  id: '/revenue',
+  path: '/revenue',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellServicesRoute = ShellServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellSessionsRoute = ShellSessionsRouteImport.update({
+  id: '/sessions',
+  path: '/sessions',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellSystemHealthRoute = ShellSystemHealthRouteImport.update({
+  id: '/system-health',
+  path: '/system-health',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellTelegramRoute = ShellTelegramRouteImport.update({
+  id: '/telegram',
+  path: '/telegram',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellTemplatesRoute = ShellTemplatesRouteImport.update({
+  id: '/templates',
+  path: '/templates',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellBatchesIndexRoute = ShellBatchesIndexRouteImport.update({
+  id: '/batches/',
+  path: '/batches/',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellBatchesBatchIdRoute = ShellBatchesBatchIdRouteImport.update({
+  id: '/batches/$batchId',
+  path: '/batches/$batchId',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellQrCodesIndexRoute = ShellQrCodesIndexRouteImport.update({
+  id: '/qr-codes/',
+  path: '/qr-codes/',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellQrCodesQrIdRoute = ShellQrCodesQrIdRouteImport.update({
+  id: '/qr-codes/$qrId',
+  path: '/qr-codes/$qrId',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellRolesIndexRoute = ShellRolesIndexRouteImport.update({
+  id: '/roles/',
+  path: '/roles/',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellRolesRoleIdRoute = ShellRolesRoleIdRouteImport.update({
+  id: '/roles/$roleId',
+  path: '/roles/$roleId',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellSettingsAdministrationRoute =
+  ShellSettingsAdministrationRouteImport.update({
+    id: '/settings/administration',
+    path: '/settings/administration',
+    getParentRoute: () => ShellRoute,
+  } as any)
+const ShellSettingsGeneralRoute = ShellSettingsGeneralRouteImport.update({
+  id: '/settings/general',
+  path: '/settings/general',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellSettingsSecurityRoute = ShellSettingsSecurityRouteImport.update({
+  id: '/settings/security',
+  path: '/settings/security',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellUsersIndexRoute = ShellUsersIndexRouteImport.update({
+  id: '/users/',
+  path: '/users/',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellUsersUserIdRoute = ShellUsersUserIdRouteImport.update({
+  id: '/users/$userId',
+  path: '/users/$userId',
+  getParentRoute: () => ShellRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof ShellIndexRoute
+  '/activations': typeof ShellActivationsRoute
+  '/activity-logs': typeof ShellActivityLogsRoute
+  '/error-logs': typeof ShellErrorLogsRoute
+  '/generate-qr': typeof ShellGenerateQrRoute
+  '/notifications': typeof ShellNotificationsRoute
+  '/payments': typeof ShellPaymentsRoute
+  '/plans': typeof ShellPlansRoute
+  '/revenue': typeof ShellRevenueRoute
+  '/services': typeof ShellServicesRoute
+  '/sessions': typeof ShellSessionsRoute
+  '/system-health': typeof ShellSystemHealthRoute
+  '/telegram': typeof ShellTelegramRoute
+  '/templates': typeof ShellTemplatesRoute
+  '/batches/$batchId': typeof ShellBatchesBatchIdRoute
+  '/qr-codes/$qrId': typeof ShellQrCodesQrIdRoute
+  '/roles/$roleId': typeof ShellRolesRoleIdRoute
+  '/settings/administration': typeof ShellSettingsAdministrationRoute
+  '/settings/general': typeof ShellSettingsGeneralRoute
+  '/settings/security': typeof ShellSettingsSecurityRoute
+  '/users/$userId': typeof ShellUsersUserIdRoute
+  '/batches/': typeof ShellBatchesIndexRoute
+  '/qr-codes/': typeof ShellQrCodesIndexRoute
+  '/roles/': typeof ShellRolesIndexRoute
+  '/users/': typeof ShellUsersIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/activations': typeof ShellActivationsRoute
+  '/activity-logs': typeof ShellActivityLogsRoute
+  '/error-logs': typeof ShellErrorLogsRoute
+  '/generate-qr': typeof ShellGenerateQrRoute
+  '/notifications': typeof ShellNotificationsRoute
+  '/payments': typeof ShellPaymentsRoute
+  '/plans': typeof ShellPlansRoute
+  '/revenue': typeof ShellRevenueRoute
+  '/services': typeof ShellServicesRoute
+  '/sessions': typeof ShellSessionsRoute
+  '/system-health': typeof ShellSystemHealthRoute
+  '/telegram': typeof ShellTelegramRoute
+  '/templates': typeof ShellTemplatesRoute
+  '/': typeof ShellIndexRoute
+  '/batches/$batchId': typeof ShellBatchesBatchIdRoute
+  '/qr-codes/$qrId': typeof ShellQrCodesQrIdRoute
+  '/roles/$roleId': typeof ShellRolesRoleIdRoute
+  '/settings/administration': typeof ShellSettingsAdministrationRoute
+  '/settings/general': typeof ShellSettingsGeneralRoute
+  '/settings/security': typeof ShellSettingsSecurityRoute
+  '/users/$userId': typeof ShellUsersUserIdRoute
+  '/batches': typeof ShellBatchesIndexRoute
+  '/qr-codes': typeof ShellQrCodesIndexRoute
+  '/roles': typeof ShellRolesIndexRoute
+  '/users': typeof ShellUsersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_shell': typeof ShellRouteWithChildren
+  '/_shell/activations': typeof ShellActivationsRoute
+  '/_shell/activity-logs': typeof ShellActivityLogsRoute
+  '/_shell/error-logs': typeof ShellErrorLogsRoute
+  '/_shell/generate-qr': typeof ShellGenerateQrRoute
+  '/_shell/notifications': typeof ShellNotificationsRoute
+  '/_shell/payments': typeof ShellPaymentsRoute
+  '/_shell/plans': typeof ShellPlansRoute
+  '/_shell/revenue': typeof ShellRevenueRoute
+  '/_shell/services': typeof ShellServicesRoute
+  '/_shell/sessions': typeof ShellSessionsRoute
+  '/_shell/system-health': typeof ShellSystemHealthRoute
+  '/_shell/telegram': typeof ShellTelegramRoute
+  '/_shell/templates': typeof ShellTemplatesRoute
+  '/_shell/': typeof ShellIndexRoute
+  '/_shell/batches/$batchId': typeof ShellBatchesBatchIdRoute
+  '/_shell/qr-codes/$qrId': typeof ShellQrCodesQrIdRoute
+  '/_shell/roles/$roleId': typeof ShellRolesRoleIdRoute
+  '/_shell/settings/administration': typeof ShellSettingsAdministrationRoute
+  '/_shell/settings/general': typeof ShellSettingsGeneralRoute
+  '/_shell/settings/security': typeof ShellSettingsSecurityRoute
+  '/_shell/users/$userId': typeof ShellUsersUserIdRoute
+  '/_shell/batches/': typeof ShellBatchesIndexRoute
+  '/_shell/qr-codes/': typeof ShellQrCodesIndexRoute
+  '/_shell/roles/': typeof ShellRolesIndexRoute
+  '/_shell/users/': typeof ShellUsersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/activations'
+    | '/activity-logs'
+    | '/error-logs'
+    | '/generate-qr'
+    | '/notifications'
+    | '/payments'
+    | '/plans'
+    | '/revenue'
+    | '/services'
+    | '/sessions'
+    | '/system-health'
+    | '/telegram'
+    | '/templates'
+    | '/batches/$batchId'
+    | '/qr-codes/$qrId'
+    | '/roles/$roleId'
+    | '/settings/administration'
+    | '/settings/general'
+    | '/settings/security'
+    | '/users/$userId'
+    | '/batches/'
+    | '/qr-codes/'
+    | '/roles/'
+    | '/users/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/activations'
+    | '/activity-logs'
+    | '/error-logs'
+    | '/generate-qr'
+    | '/notifications'
+    | '/payments'
+    | '/plans'
+    | '/revenue'
+    | '/services'
+    | '/sessions'
+    | '/system-health'
+    | '/telegram'
+    | '/templates'
+    | '/'
+    | '/batches/$batchId'
+    | '/qr-codes/$qrId'
+    | '/roles/$roleId'
+    | '/settings/administration'
+    | '/settings/general'
+    | '/settings/security'
+    | '/users/$userId'
+    | '/batches'
+    | '/qr-codes'
+    | '/roles'
+    | '/users'
+  id:
+    | '__root__'
+    | '/_shell'
+    | '/_shell/activations'
+    | '/_shell/activity-logs'
+    | '/_shell/error-logs'
+    | '/_shell/generate-qr'
+    | '/_shell/notifications'
+    | '/_shell/payments'
+    | '/_shell/plans'
+    | '/_shell/revenue'
+    | '/_shell/services'
+    | '/_shell/sessions'
+    | '/_shell/system-health'
+    | '/_shell/telegram'
+    | '/_shell/templates'
+    | '/_shell/'
+    | '/_shell/batches/$batchId'
+    | '/_shell/qr-codes/$qrId'
+    | '/_shell/roles/$roleId'
+    | '/_shell/settings/administration'
+    | '/_shell/settings/general'
+    | '/_shell/settings/security'
+    | '/_shell/users/$userId'
+    | '/_shell/batches/'
+    | '/_shell/qr-codes/'
+    | '/_shell/roles/'
+    | '/_shell/users/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  ShellRoute: typeof ShellRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_shell': {
+      id: '/_shell'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof ShellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_shell/': {
+      id: '/_shell/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof ShellIndexRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/activations': {
+      id: '/_shell/activations'
+      path: '/activations'
+      fullPath: '/activations'
+      preLoaderRoute: typeof ShellActivationsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/activity-logs': {
+      id: '/_shell/activity-logs'
+      path: '/activity-logs'
+      fullPath: '/activity-logs'
+      preLoaderRoute: typeof ShellActivityLogsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/error-logs': {
+      id: '/_shell/error-logs'
+      path: '/error-logs'
+      fullPath: '/error-logs'
+      preLoaderRoute: typeof ShellErrorLogsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/generate-qr': {
+      id: '/_shell/generate-qr'
+      path: '/generate-qr'
+      fullPath: '/generate-qr'
+      preLoaderRoute: typeof ShellGenerateQrRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/notifications': {
+      id: '/_shell/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof ShellNotificationsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/payments': {
+      id: '/_shell/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof ShellPaymentsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/plans': {
+      id: '/_shell/plans'
+      path: '/plans'
+      fullPath: '/plans'
+      preLoaderRoute: typeof ShellPlansRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/revenue': {
+      id: '/_shell/revenue'
+      path: '/revenue'
+      fullPath: '/revenue'
+      preLoaderRoute: typeof ShellRevenueRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/services': {
+      id: '/_shell/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ShellServicesRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/sessions': {
+      id: '/_shell/sessions'
+      path: '/sessions'
+      fullPath: '/sessions'
+      preLoaderRoute: typeof ShellSessionsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/system-health': {
+      id: '/_shell/system-health'
+      path: '/system-health'
+      fullPath: '/system-health'
+      preLoaderRoute: typeof ShellSystemHealthRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/telegram': {
+      id: '/_shell/telegram'
+      path: '/telegram'
+      fullPath: '/telegram'
+      preLoaderRoute: typeof ShellTelegramRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/templates': {
+      id: '/_shell/templates'
+      path: '/templates'
+      fullPath: '/templates'
+      preLoaderRoute: typeof ShellTemplatesRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/batches/': {
+      id: '/_shell/batches/'
+      path: '/batches'
+      fullPath: '/batches/'
+      preLoaderRoute: typeof ShellBatchesIndexRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/batches/$batchId': {
+      id: '/_shell/batches/$batchId'
+      path: '/batches/$batchId'
+      fullPath: '/batches/$batchId'
+      preLoaderRoute: typeof ShellBatchesBatchIdRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/qr-codes/': {
+      id: '/_shell/qr-codes/'
+      path: '/qr-codes'
+      fullPath: '/qr-codes/'
+      preLoaderRoute: typeof ShellQrCodesIndexRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/qr-codes/$qrId': {
+      id: '/_shell/qr-codes/$qrId'
+      path: '/qr-codes/$qrId'
+      fullPath: '/qr-codes/$qrId'
+      preLoaderRoute: typeof ShellQrCodesQrIdRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/roles/': {
+      id: '/_shell/roles/'
+      path: '/roles'
+      fullPath: '/roles/'
+      preLoaderRoute: typeof ShellRolesIndexRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/roles/$roleId': {
+      id: '/_shell/roles/$roleId'
+      path: '/roles/$roleId'
+      fullPath: '/roles/$roleId'
+      preLoaderRoute: typeof ShellRolesRoleIdRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/settings/administration': {
+      id: '/_shell/settings/administration'
+      path: '/settings/administration'
+      fullPath: '/settings/administration'
+      preLoaderRoute: typeof ShellSettingsAdministrationRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/settings/general': {
+      id: '/_shell/settings/general'
+      path: '/settings/general'
+      fullPath: '/settings/general'
+      preLoaderRoute: typeof ShellSettingsGeneralRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/settings/security': {
+      id: '/_shell/settings/security'
+      path: '/settings/security'
+      fullPath: '/settings/security'
+      preLoaderRoute: typeof ShellSettingsSecurityRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/users/': {
+      id: '/_shell/users/'
+      path: '/users'
+      fullPath: '/users/'
+      preLoaderRoute: typeof ShellUsersIndexRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/users/$userId': {
+      id: '/_shell/users/$userId'
+      path: '/users/$userId'
+      fullPath: '/users/$userId'
+      preLoaderRoute: typeof ShellUsersUserIdRouteImport
+      parentRoute: typeof ShellRoute
     }
   }
 }
 
+interface ShellRouteChildren {
+  ShellActivationsRoute: typeof ShellActivationsRoute
+  ShellActivityLogsRoute: typeof ShellActivityLogsRoute
+  ShellErrorLogsRoute: typeof ShellErrorLogsRoute
+  ShellGenerateQrRoute: typeof ShellGenerateQrRoute
+  ShellNotificationsRoute: typeof ShellNotificationsRoute
+  ShellPaymentsRoute: typeof ShellPaymentsRoute
+  ShellPlansRoute: typeof ShellPlansRoute
+  ShellRevenueRoute: typeof ShellRevenueRoute
+  ShellServicesRoute: typeof ShellServicesRoute
+  ShellSessionsRoute: typeof ShellSessionsRoute
+  ShellSystemHealthRoute: typeof ShellSystemHealthRoute
+  ShellTelegramRoute: typeof ShellTelegramRoute
+  ShellTemplatesRoute: typeof ShellTemplatesRoute
+  ShellIndexRoute: typeof ShellIndexRoute
+  ShellBatchesBatchIdRoute: typeof ShellBatchesBatchIdRoute
+  ShellQrCodesQrIdRoute: typeof ShellQrCodesQrIdRoute
+  ShellRolesRoleIdRoute: typeof ShellRolesRoleIdRoute
+  ShellSettingsAdministrationRoute: typeof ShellSettingsAdministrationRoute
+  ShellSettingsGeneralRoute: typeof ShellSettingsGeneralRoute
+  ShellSettingsSecurityRoute: typeof ShellSettingsSecurityRoute
+  ShellUsersUserIdRoute: typeof ShellUsersUserIdRoute
+  ShellBatchesIndexRoute: typeof ShellBatchesIndexRoute
+  ShellQrCodesIndexRoute: typeof ShellQrCodesIndexRoute
+  ShellRolesIndexRoute: typeof ShellRolesIndexRoute
+  ShellUsersIndexRoute: typeof ShellUsersIndexRoute
+}
+
+const ShellRouteChildren: ShellRouteChildren = {
+  ShellActivationsRoute: ShellActivationsRoute,
+  ShellActivityLogsRoute: ShellActivityLogsRoute,
+  ShellErrorLogsRoute: ShellErrorLogsRoute,
+  ShellGenerateQrRoute: ShellGenerateQrRoute,
+  ShellNotificationsRoute: ShellNotificationsRoute,
+  ShellPaymentsRoute: ShellPaymentsRoute,
+  ShellPlansRoute: ShellPlansRoute,
+  ShellRevenueRoute: ShellRevenueRoute,
+  ShellServicesRoute: ShellServicesRoute,
+  ShellSessionsRoute: ShellSessionsRoute,
+  ShellSystemHealthRoute: ShellSystemHealthRoute,
+  ShellTelegramRoute: ShellTelegramRoute,
+  ShellTemplatesRoute: ShellTemplatesRoute,
+  ShellIndexRoute: ShellIndexRoute,
+  ShellBatchesBatchIdRoute: ShellBatchesBatchIdRoute,
+  ShellQrCodesQrIdRoute: ShellQrCodesQrIdRoute,
+  ShellRolesRoleIdRoute: ShellRolesRoleIdRoute,
+  ShellSettingsAdministrationRoute: ShellSettingsAdministrationRoute,
+  ShellSettingsGeneralRoute: ShellSettingsGeneralRoute,
+  ShellSettingsSecurityRoute: ShellSettingsSecurityRoute,
+  ShellUsersUserIdRoute: ShellUsersUserIdRoute,
+  ShellBatchesIndexRoute: ShellBatchesIndexRoute,
+  ShellQrCodesIndexRoute: ShellQrCodesIndexRoute,
+  ShellRolesIndexRoute: ShellRolesIndexRoute,
+  ShellUsersIndexRoute: ShellUsersIndexRoute,
+}
+
+const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  ShellRoute: ShellRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
