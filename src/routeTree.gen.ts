@@ -13,6 +13,7 @@ import { Route as ShellRouteImport } from './routes/_shell'
 import { Route as ShellIndexRouteImport } from './routes/_shell.index'
 import { Route as ShellActivationsRouteImport } from './routes/_shell.activations'
 import { Route as ShellGenerateQrRouteImport } from './routes/_shell.generate-qr'
+import { Route as ShellNotificationsRouteImport } from './routes/_shell.notifications'
 import { Route as ShellSessionsRouteImport } from './routes/_shell.sessions'
 import { Route as ShellTelegramRouteImport } from './routes/_shell.telegram'
 import { Route as ShellBatchesIndexRouteImport } from './routes/_shell.batches.index'
@@ -41,6 +42,11 @@ const ShellActivationsRoute = ShellActivationsRouteImport.update({
 const ShellGenerateQrRoute = ShellGenerateQrRouteImport.update({
   id: '/generate-qr',
   path: '/generate-qr',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellNotificationsRoute = ShellNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellSessionsRoute = ShellSessionsRouteImport.update({
@@ -98,6 +104,7 @@ export interface FileRoutesByFullPath {
   '/': typeof ShellIndexRoute
   '/activations': typeof ShellActivationsRoute
   '/generate-qr': typeof ShellGenerateQrRoute
+  '/notifications': typeof ShellNotificationsRoute
   '/sessions': typeof ShellSessionsRoute
   '/telegram': typeof ShellTelegramRoute
   '/batches/$batchId': typeof ShellBatchesBatchIdRoute
@@ -112,6 +119,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/activations': typeof ShellActivationsRoute
   '/generate-qr': typeof ShellGenerateQrRoute
+  '/notifications': typeof ShellNotificationsRoute
   '/sessions': typeof ShellSessionsRoute
   '/telegram': typeof ShellTelegramRoute
   '/': typeof ShellIndexRoute
@@ -129,6 +137,7 @@ export interface FileRoutesById {
   '/_shell': typeof ShellRouteWithChildren
   '/_shell/activations': typeof ShellActivationsRoute
   '/_shell/generate-qr': typeof ShellGenerateQrRoute
+  '/_shell/notifications': typeof ShellNotificationsRoute
   '/_shell/sessions': typeof ShellSessionsRoute
   '/_shell/telegram': typeof ShellTelegramRoute
   '/_shell/': typeof ShellIndexRoute
@@ -147,6 +156,7 @@ export interface FileRouteTypes {
     | '/'
     | '/activations'
     | '/generate-qr'
+    | '/notifications'
     | '/sessions'
     | '/telegram'
     | '/batches/$batchId'
@@ -161,6 +171,7 @@ export interface FileRouteTypes {
   to:
     | '/activations'
     | '/generate-qr'
+    | '/notifications'
     | '/sessions'
     | '/telegram'
     | '/'
@@ -177,6 +188,7 @@ export interface FileRouteTypes {
     | '/_shell'
     | '/_shell/activations'
     | '/_shell/generate-qr'
+    | '/_shell/notifications'
     | '/_shell/sessions'
     | '/_shell/telegram'
     | '/_shell/'
@@ -222,6 +234,13 @@ declare module '@tanstack/react-router' {
       path: '/generate-qr'
       fullPath: '/generate-qr'
       preLoaderRoute: typeof ShellGenerateQrRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/notifications': {
+      id: '/_shell/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof ShellNotificationsRouteImport
       parentRoute: typeof ShellRoute
     }
     '/_shell/sessions': {
@@ -300,6 +319,7 @@ declare module '@tanstack/react-router' {
 interface ShellRouteChildren {
   ShellActivationsRoute: typeof ShellActivationsRoute
   ShellGenerateQrRoute: typeof ShellGenerateQrRoute
+  ShellNotificationsRoute: typeof ShellNotificationsRoute
   ShellSessionsRoute: typeof ShellSessionsRoute
   ShellTelegramRoute: typeof ShellTelegramRoute
   ShellIndexRoute: typeof ShellIndexRoute
@@ -316,6 +336,7 @@ interface ShellRouteChildren {
 const ShellRouteChildren: ShellRouteChildren = {
   ShellActivationsRoute: ShellActivationsRoute,
   ShellGenerateQrRoute: ShellGenerateQrRoute,
+  ShellNotificationsRoute: ShellNotificationsRoute,
   ShellSessionsRoute: ShellSessionsRoute,
   ShellTelegramRoute: ShellTelegramRoute,
   ShellIndexRoute: ShellIndexRoute,
