@@ -13,6 +13,7 @@ import { Route as ShellRouteImport } from './routes/_shell'
 import { Route as ShellIndexRouteImport } from './routes/_shell.index'
 import { Route as ShellSessionsRouteImport } from './routes/_shell.sessions'
 import { Route as ShellQrCodesIndexRouteImport } from './routes/_shell.qr-codes.index'
+import { Route as ShellQrCodesQrIdRouteImport } from './routes/_shell.qr-codes.$qrId'
 import { Route as ShellRolesIndexRouteImport } from './routes/_shell.roles.index'
 import { Route as ShellRolesRoleIdRouteImport } from './routes/_shell.roles.$roleId'
 import { Route as ShellUsersIndexRouteImport } from './routes/_shell.users.index'
@@ -35,6 +36,11 @@ const ShellSessionsRoute = ShellSessionsRouteImport.update({
 const ShellQrCodesIndexRoute = ShellQrCodesIndexRouteImport.update({
   id: '/qr-codes/',
   path: '/qr-codes/',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellQrCodesQrIdRoute = ShellQrCodesQrIdRouteImport.update({
+  id: '/qr-codes/$qrId',
+  path: '/qr-codes/$qrId',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellRolesIndexRoute = ShellRolesIndexRouteImport.update({
@@ -61,6 +67,7 @@ const ShellUsersUserIdRoute = ShellUsersUserIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof ShellIndexRoute
   '/sessions': typeof ShellSessionsRoute
+  '/qr-codes/$qrId': typeof ShellQrCodesQrIdRoute
   '/roles/$roleId': typeof ShellRolesRoleIdRoute
   '/users/$userId': typeof ShellUsersUserIdRoute
   '/qr-codes/': typeof ShellQrCodesIndexRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/sessions': typeof ShellSessionsRoute
   '/': typeof ShellIndexRoute
+  '/qr-codes/$qrId': typeof ShellQrCodesQrIdRoute
   '/roles/$roleId': typeof ShellRolesRoleIdRoute
   '/users/$userId': typeof ShellUsersUserIdRoute
   '/qr-codes': typeof ShellQrCodesIndexRoute
@@ -81,6 +89,7 @@ export interface FileRoutesById {
   '/_shell': typeof ShellRouteWithChildren
   '/_shell/sessions': typeof ShellSessionsRoute
   '/_shell/': typeof ShellIndexRoute
+  '/_shell/qr-codes/$qrId': typeof ShellQrCodesQrIdRoute
   '/_shell/roles/$roleId': typeof ShellRolesRoleIdRoute
   '/_shell/users/$userId': typeof ShellUsersUserIdRoute
   '/_shell/qr-codes/': typeof ShellQrCodesIndexRoute
@@ -92,6 +101,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/sessions'
+    | '/qr-codes/$qrId'
     | '/roles/$roleId'
     | '/users/$userId'
     | '/qr-codes/'
@@ -101,6 +111,7 @@ export interface FileRouteTypes {
   to:
     | '/sessions'
     | '/'
+    | '/qr-codes/$qrId'
     | '/roles/$roleId'
     | '/users/$userId'
     | '/qr-codes'
@@ -111,6 +122,7 @@ export interface FileRouteTypes {
     | '/_shell'
     | '/_shell/sessions'
     | '/_shell/'
+    | '/_shell/qr-codes/$qrId'
     | '/_shell/roles/$roleId'
     | '/_shell/users/$userId'
     | '/_shell/qr-codes/'
@@ -152,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellQrCodesIndexRouteImport
       parentRoute: typeof ShellRoute
     }
+    '/_shell/qr-codes/$qrId': {
+      id: '/_shell/qr-codes/$qrId'
+      path: '/qr-codes/$qrId'
+      fullPath: '/qr-codes/$qrId'
+      preLoaderRoute: typeof ShellQrCodesQrIdRouteImport
+      parentRoute: typeof ShellRoute
+    }
     '/_shell/roles/': {
       id: '/_shell/roles/'
       path: '/roles'
@@ -186,6 +205,7 @@ declare module '@tanstack/react-router' {
 interface ShellRouteChildren {
   ShellSessionsRoute: typeof ShellSessionsRoute
   ShellIndexRoute: typeof ShellIndexRoute
+  ShellQrCodesQrIdRoute: typeof ShellQrCodesQrIdRoute
   ShellRolesRoleIdRoute: typeof ShellRolesRoleIdRoute
   ShellUsersUserIdRoute: typeof ShellUsersUserIdRoute
   ShellQrCodesIndexRoute: typeof ShellQrCodesIndexRoute
@@ -196,6 +216,7 @@ interface ShellRouteChildren {
 const ShellRouteChildren: ShellRouteChildren = {
   ShellSessionsRoute: ShellSessionsRoute,
   ShellIndexRoute: ShellIndexRoute,
+  ShellQrCodesQrIdRoute: ShellQrCodesQrIdRoute,
   ShellRolesRoleIdRoute: ShellRolesRoleIdRoute,
   ShellUsersUserIdRoute: ShellUsersUserIdRoute,
   ShellQrCodesIndexRoute: ShellQrCodesIndexRoute,
