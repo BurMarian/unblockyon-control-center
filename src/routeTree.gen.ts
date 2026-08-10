@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ShellRouteImport } from './routes/_shell'
 import { Route as ShellIndexRouteImport } from './routes/_shell.index'
 import { Route as ShellSessionsRouteImport } from './routes/_shell.sessions'
+import { Route as ShellQrCodesIndexRouteImport } from './routes/_shell.qr-codes.index'
 import { Route as ShellRolesIndexRouteImport } from './routes/_shell.roles.index'
 import { Route as ShellRolesRoleIdRouteImport } from './routes/_shell.roles.$roleId'
 import { Route as ShellUsersIndexRouteImport } from './routes/_shell.users.index'
@@ -29,6 +30,11 @@ const ShellIndexRoute = ShellIndexRouteImport.update({
 const ShellSessionsRoute = ShellSessionsRouteImport.update({
   id: '/sessions',
   path: '/sessions',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellQrCodesIndexRoute = ShellQrCodesIndexRouteImport.update({
+  id: '/qr-codes/',
+  path: '/qr-codes/',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellRolesIndexRoute = ShellRolesIndexRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/sessions': typeof ShellSessionsRoute
   '/roles/$roleId': typeof ShellRolesRoleIdRoute
   '/users/$userId': typeof ShellUsersUserIdRoute
+  '/qr-codes/': typeof ShellQrCodesIndexRoute
   '/roles/': typeof ShellRolesIndexRoute
   '/users/': typeof ShellUsersIndexRoute
 }
@@ -65,6 +72,7 @@ export interface FileRoutesByTo {
   '/': typeof ShellIndexRoute
   '/roles/$roleId': typeof ShellRolesRoleIdRoute
   '/users/$userId': typeof ShellUsersUserIdRoute
+  '/qr-codes': typeof ShellQrCodesIndexRoute
   '/roles': typeof ShellRolesIndexRoute
   '/users': typeof ShellUsersIndexRoute
 }
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   '/_shell/': typeof ShellIndexRoute
   '/_shell/roles/$roleId': typeof ShellRolesRoleIdRoute
   '/_shell/users/$userId': typeof ShellUsersUserIdRoute
+  '/_shell/qr-codes/': typeof ShellQrCodesIndexRoute
   '/_shell/roles/': typeof ShellRolesIndexRoute
   '/_shell/users/': typeof ShellUsersIndexRoute
 }
@@ -85,6 +94,7 @@ export interface FileRouteTypes {
     | '/sessions'
     | '/roles/$roleId'
     | '/users/$userId'
+    | '/qr-codes/'
     | '/roles/'
     | '/users/'
   fileRoutesByTo: FileRoutesByTo
@@ -93,6 +103,7 @@ export interface FileRouteTypes {
     | '/'
     | '/roles/$roleId'
     | '/users/$userId'
+    | '/qr-codes'
     | '/roles'
     | '/users'
   id:
@@ -102,6 +113,7 @@ export interface FileRouteTypes {
     | '/_shell/'
     | '/_shell/roles/$roleId'
     | '/_shell/users/$userId'
+    | '/_shell/qr-codes/'
     | '/_shell/roles/'
     | '/_shell/users/'
   fileRoutesById: FileRoutesById
@@ -131,6 +143,13 @@ declare module '@tanstack/react-router' {
       path: '/sessions'
       fullPath: '/sessions'
       preLoaderRoute: typeof ShellSessionsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/qr-codes/': {
+      id: '/_shell/qr-codes/'
+      path: '/qr-codes'
+      fullPath: '/qr-codes/'
+      preLoaderRoute: typeof ShellQrCodesIndexRouteImport
       parentRoute: typeof ShellRoute
     }
     '/_shell/roles/': {
@@ -169,6 +188,7 @@ interface ShellRouteChildren {
   ShellIndexRoute: typeof ShellIndexRoute
   ShellRolesRoleIdRoute: typeof ShellRolesRoleIdRoute
   ShellUsersUserIdRoute: typeof ShellUsersUserIdRoute
+  ShellQrCodesIndexRoute: typeof ShellQrCodesIndexRoute
   ShellRolesIndexRoute: typeof ShellRolesIndexRoute
   ShellUsersIndexRoute: typeof ShellUsersIndexRoute
 }
@@ -178,6 +198,7 @@ const ShellRouteChildren: ShellRouteChildren = {
   ShellIndexRoute: ShellIndexRoute,
   ShellRolesRoleIdRoute: ShellRolesRoleIdRoute,
   ShellUsersUserIdRoute: ShellUsersUserIdRoute,
+  ShellQrCodesIndexRoute: ShellQrCodesIndexRoute,
   ShellRolesIndexRoute: ShellRolesIndexRoute,
   ShellUsersIndexRoute: ShellUsersIndexRoute,
 }
