@@ -16,6 +16,7 @@ import { Route as ShellGenerateQrRouteImport } from './routes/_shell.generate-qr
 import { Route as ShellNotificationsRouteImport } from './routes/_shell.notifications'
 import { Route as ShellSessionsRouteImport } from './routes/_shell.sessions'
 import { Route as ShellTelegramRouteImport } from './routes/_shell.telegram'
+import { Route as ShellTemplatesRouteImport } from './routes/_shell.templates'
 import { Route as ShellBatchesIndexRouteImport } from './routes/_shell.batches.index'
 import { Route as ShellBatchesBatchIdRouteImport } from './routes/_shell.batches.$batchId'
 import { Route as ShellQrCodesIndexRouteImport } from './routes/_shell.qr-codes.index'
@@ -57,6 +58,11 @@ const ShellSessionsRoute = ShellSessionsRouteImport.update({
 const ShellTelegramRoute = ShellTelegramRouteImport.update({
   id: '/telegram',
   path: '/telegram',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellTemplatesRoute = ShellTemplatesRouteImport.update({
+  id: '/templates',
+  path: '/templates',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellBatchesIndexRoute = ShellBatchesIndexRouteImport.update({
@@ -107,6 +113,7 @@ export interface FileRoutesByFullPath {
   '/notifications': typeof ShellNotificationsRoute
   '/sessions': typeof ShellSessionsRoute
   '/telegram': typeof ShellTelegramRoute
+  '/templates': typeof ShellTemplatesRoute
   '/batches/$batchId': typeof ShellBatchesBatchIdRoute
   '/qr-codes/$qrId': typeof ShellQrCodesQrIdRoute
   '/roles/$roleId': typeof ShellRolesRoleIdRoute
@@ -122,6 +129,7 @@ export interface FileRoutesByTo {
   '/notifications': typeof ShellNotificationsRoute
   '/sessions': typeof ShellSessionsRoute
   '/telegram': typeof ShellTelegramRoute
+  '/templates': typeof ShellTemplatesRoute
   '/': typeof ShellIndexRoute
   '/batches/$batchId': typeof ShellBatchesBatchIdRoute
   '/qr-codes/$qrId': typeof ShellQrCodesQrIdRoute
@@ -140,6 +148,7 @@ export interface FileRoutesById {
   '/_shell/notifications': typeof ShellNotificationsRoute
   '/_shell/sessions': typeof ShellSessionsRoute
   '/_shell/telegram': typeof ShellTelegramRoute
+  '/_shell/templates': typeof ShellTemplatesRoute
   '/_shell/': typeof ShellIndexRoute
   '/_shell/batches/$batchId': typeof ShellBatchesBatchIdRoute
   '/_shell/qr-codes/$qrId': typeof ShellQrCodesQrIdRoute
@@ -159,6 +168,7 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/sessions'
     | '/telegram'
+    | '/templates'
     | '/batches/$batchId'
     | '/qr-codes/$qrId'
     | '/roles/$roleId'
@@ -174,6 +184,7 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/sessions'
     | '/telegram'
+    | '/templates'
     | '/'
     | '/batches/$batchId'
     | '/qr-codes/$qrId'
@@ -191,6 +202,7 @@ export interface FileRouteTypes {
     | '/_shell/notifications'
     | '/_shell/sessions'
     | '/_shell/telegram'
+    | '/_shell/templates'
     | '/_shell/'
     | '/_shell/batches/$batchId'
     | '/_shell/qr-codes/$qrId'
@@ -255,6 +267,13 @@ declare module '@tanstack/react-router' {
       path: '/telegram'
       fullPath: '/telegram'
       preLoaderRoute: typeof ShellTelegramRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/templates': {
+      id: '/_shell/templates'
+      path: '/templates'
+      fullPath: '/templates'
+      preLoaderRoute: typeof ShellTemplatesRouteImport
       parentRoute: typeof ShellRoute
     }
     '/_shell/batches/': {
@@ -322,6 +341,7 @@ interface ShellRouteChildren {
   ShellNotificationsRoute: typeof ShellNotificationsRoute
   ShellSessionsRoute: typeof ShellSessionsRoute
   ShellTelegramRoute: typeof ShellTelegramRoute
+  ShellTemplatesRoute: typeof ShellTemplatesRoute
   ShellIndexRoute: typeof ShellIndexRoute
   ShellBatchesBatchIdRoute: typeof ShellBatchesBatchIdRoute
   ShellQrCodesQrIdRoute: typeof ShellQrCodesQrIdRoute
@@ -339,6 +359,7 @@ const ShellRouteChildren: ShellRouteChildren = {
   ShellNotificationsRoute: ShellNotificationsRoute,
   ShellSessionsRoute: ShellSessionsRoute,
   ShellTelegramRoute: ShellTelegramRoute,
+  ShellTemplatesRoute: ShellTemplatesRoute,
   ShellIndexRoute: ShellIndexRoute,
   ShellBatchesBatchIdRoute: ShellBatchesBatchIdRoute,
   ShellQrCodesQrIdRoute: ShellQrCodesQrIdRoute,
