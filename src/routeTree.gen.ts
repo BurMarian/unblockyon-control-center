@@ -30,6 +30,9 @@ import { Route as ShellQrCodesIndexRouteImport } from './routes/_shell.qr-codes.
 import { Route as ShellQrCodesQrIdRouteImport } from './routes/_shell.qr-codes.$qrId'
 import { Route as ShellRolesIndexRouteImport } from './routes/_shell.roles.index'
 import { Route as ShellRolesRoleIdRouteImport } from './routes/_shell.roles.$roleId'
+import { Route as ShellSettingsAdministrationRouteImport } from './routes/_shell.settings.administration'
+import { Route as ShellSettingsGeneralRouteImport } from './routes/_shell.settings.general'
+import { Route as ShellSettingsSecurityRouteImport } from './routes/_shell.settings.security'
 import { Route as ShellUsersIndexRouteImport } from './routes/_shell.users.index'
 import { Route as ShellUsersUserIdRouteImport } from './routes/_shell.users.$userId'
 
@@ -137,6 +140,22 @@ const ShellRolesRoleIdRoute = ShellRolesRoleIdRouteImport.update({
   path: '/roles/$roleId',
   getParentRoute: () => ShellRoute,
 } as any)
+const ShellSettingsAdministrationRoute =
+  ShellSettingsAdministrationRouteImport.update({
+    id: '/settings/administration',
+    path: '/settings/administration',
+    getParentRoute: () => ShellRoute,
+  } as any)
+const ShellSettingsGeneralRoute = ShellSettingsGeneralRouteImport.update({
+  id: '/settings/general',
+  path: '/settings/general',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellSettingsSecurityRoute = ShellSettingsSecurityRouteImport.update({
+  id: '/settings/security',
+  path: '/settings/security',
+  getParentRoute: () => ShellRoute,
+} as any)
 const ShellUsersIndexRoute = ShellUsersIndexRouteImport.update({
   id: '/users/',
   path: '/users/',
@@ -166,6 +185,9 @@ export interface FileRoutesByFullPath {
   '/batches/$batchId': typeof ShellBatchesBatchIdRoute
   '/qr-codes/$qrId': typeof ShellQrCodesQrIdRoute
   '/roles/$roleId': typeof ShellRolesRoleIdRoute
+  '/settings/administration': typeof ShellSettingsAdministrationRoute
+  '/settings/general': typeof ShellSettingsGeneralRoute
+  '/settings/security': typeof ShellSettingsSecurityRoute
   '/users/$userId': typeof ShellUsersUserIdRoute
   '/batches/': typeof ShellBatchesIndexRoute
   '/qr-codes/': typeof ShellQrCodesIndexRoute
@@ -190,6 +212,9 @@ export interface FileRoutesByTo {
   '/batches/$batchId': typeof ShellBatchesBatchIdRoute
   '/qr-codes/$qrId': typeof ShellQrCodesQrIdRoute
   '/roles/$roleId': typeof ShellRolesRoleIdRoute
+  '/settings/administration': typeof ShellSettingsAdministrationRoute
+  '/settings/general': typeof ShellSettingsGeneralRoute
+  '/settings/security': typeof ShellSettingsSecurityRoute
   '/users/$userId': typeof ShellUsersUserIdRoute
   '/batches': typeof ShellBatchesIndexRoute
   '/qr-codes': typeof ShellQrCodesIndexRoute
@@ -216,6 +241,9 @@ export interface FileRoutesById {
   '/_shell/batches/$batchId': typeof ShellBatchesBatchIdRoute
   '/_shell/qr-codes/$qrId': typeof ShellQrCodesQrIdRoute
   '/_shell/roles/$roleId': typeof ShellRolesRoleIdRoute
+  '/_shell/settings/administration': typeof ShellSettingsAdministrationRoute
+  '/_shell/settings/general': typeof ShellSettingsGeneralRoute
+  '/_shell/settings/security': typeof ShellSettingsSecurityRoute
   '/_shell/users/$userId': typeof ShellUsersUserIdRoute
   '/_shell/batches/': typeof ShellBatchesIndexRoute
   '/_shell/qr-codes/': typeof ShellQrCodesIndexRoute
@@ -242,6 +270,9 @@ export interface FileRouteTypes {
     | '/batches/$batchId'
     | '/qr-codes/$qrId'
     | '/roles/$roleId'
+    | '/settings/administration'
+    | '/settings/general'
+    | '/settings/security'
     | '/users/$userId'
     | '/batches/'
     | '/qr-codes/'
@@ -266,6 +297,9 @@ export interface FileRouteTypes {
     | '/batches/$batchId'
     | '/qr-codes/$qrId'
     | '/roles/$roleId'
+    | '/settings/administration'
+    | '/settings/general'
+    | '/settings/security'
     | '/users/$userId'
     | '/batches'
     | '/qr-codes'
@@ -291,6 +325,9 @@ export interface FileRouteTypes {
     | '/_shell/batches/$batchId'
     | '/_shell/qr-codes/$qrId'
     | '/_shell/roles/$roleId'
+    | '/_shell/settings/administration'
+    | '/_shell/settings/general'
+    | '/_shell/settings/security'
     | '/_shell/users/$userId'
     | '/_shell/batches/'
     | '/_shell/qr-codes/'
@@ -451,6 +488,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellRolesRoleIdRouteImport
       parentRoute: typeof ShellRoute
     }
+    '/_shell/settings/administration': {
+      id: '/_shell/settings/administration'
+      path: '/settings/administration'
+      fullPath: '/settings/administration'
+      preLoaderRoute: typeof ShellSettingsAdministrationRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/settings/general': {
+      id: '/_shell/settings/general'
+      path: '/settings/general'
+      fullPath: '/settings/general'
+      preLoaderRoute: typeof ShellSettingsGeneralRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/settings/security': {
+      id: '/_shell/settings/security'
+      path: '/settings/security'
+      fullPath: '/settings/security'
+      preLoaderRoute: typeof ShellSettingsSecurityRouteImport
+      parentRoute: typeof ShellRoute
+    }
     '/_shell/users/': {
       id: '/_shell/users/'
       path: '/users'
@@ -486,6 +544,9 @@ interface ShellRouteChildren {
   ShellBatchesBatchIdRoute: typeof ShellBatchesBatchIdRoute
   ShellQrCodesQrIdRoute: typeof ShellQrCodesQrIdRoute
   ShellRolesRoleIdRoute: typeof ShellRolesRoleIdRoute
+  ShellSettingsAdministrationRoute: typeof ShellSettingsAdministrationRoute
+  ShellSettingsGeneralRoute: typeof ShellSettingsGeneralRoute
+  ShellSettingsSecurityRoute: typeof ShellSettingsSecurityRoute
   ShellUsersUserIdRoute: typeof ShellUsersUserIdRoute
   ShellBatchesIndexRoute: typeof ShellBatchesIndexRoute
   ShellQrCodesIndexRoute: typeof ShellQrCodesIndexRoute
@@ -511,6 +572,9 @@ const ShellRouteChildren: ShellRouteChildren = {
   ShellBatchesBatchIdRoute: ShellBatchesBatchIdRoute,
   ShellQrCodesQrIdRoute: ShellQrCodesQrIdRoute,
   ShellRolesRoleIdRoute: ShellRolesRoleIdRoute,
+  ShellSettingsAdministrationRoute: ShellSettingsAdministrationRoute,
+  ShellSettingsGeneralRoute: ShellSettingsGeneralRoute,
+  ShellSettingsSecurityRoute: ShellSettingsSecurityRoute,
   ShellUsersUserIdRoute: ShellUsersUserIdRoute,
   ShellBatchesIndexRoute: ShellBatchesIndexRoute,
   ShellQrCodesIndexRoute: ShellQrCodesIndexRoute,
