@@ -221,7 +221,7 @@ function UsersPage() {
 
 export function FilterSelect({ label, options }: { label: string; options: string[] }) {
   return (
-    <Select defaultValue={options[0]}>
+    <Select defaultValue={options[0] ?? ""}>
       <SelectTrigger className="h-9 w-auto min-w-[150px]" aria-label={label}>
         <SelectValue placeholder={label} />
       </SelectTrigger>
