@@ -1,6 +1,15 @@
+import type { SupabaseClient } from "@supabase/supabase-js";
+
 import type { Db } from "../context";
 import { fromDatabaseError, notFound } from "../errors";
 import { primaryKeyOf, type ResourceDefinition } from "../resources";
+
+/**
+ * The registry addresses tables by name at runtime, so repositories talk to an
+ * untyped view of the client. Typing happens at the service/DTO boundary.
+ */
+type UntypedDb = SupabaseClient<any, "public", any>;
+const untyped = (db: Db): UntypedDb => db as unknown as UntypedDb;
 
 export interface ListParams {
   search?: string | undefined;
@@ -32,7 +41,7 @@ export async function listRecords<T>(
   const pageSize = Math.min(100, Math.max(1, params.pageSize ?? 25));
   const from = (page - 1) * pageSize;
 
-  let query = db
+  let query = untyped(db)
     .from(def.table)
     .select(def.select, { count: "exact" })
     .range(from, from + pageSize - 1);
@@ -65,7 +74,7 @@ export async function getRecord<T>(
   resourceKey: string,
   id: string,
 ): Promise<T> {
-  const { data, error } = await db
+  const { data, error } = await untyped(db)
     .from(def.table)
     .select(def.select)
     .eq(primaryKeyOf(resourceKey), id)
@@ -76,7 +85,7 @@ export async function getRecord<T>(
 }
 
 export async function insertRecord<T>(db: Db, def: ResourceDefinition, values: Record<string, unknown>): Promise<T> {
-  const { data, error } = await db.from(def.table).insert(values).select(def.select).single();
+  const { data, error } = await untyped(db).from(def.table).insert(values).select(def.select).single();
   if (error) throw fromDatabaseError(error);
   return data as T;
 }
@@ -88,7 +97,7 @@ export async function updateRecord<T>(
   id: string,
   values: Record<string, unknown>,
 ): Promise<T> {
-  const { data, error } = await db
+  const { data, error } = await untyped(db)
     .from(def.table)
     .update(values)
     .eq(primaryKeyOf(resourceKey), id)
@@ -100,7 +109,7 @@ export async function updateRecord<T>(
 }
 
 export async function deleteRecord(db: Db, def: ResourceDefinition, resourceKey: string, id: string): Promise<void> {
-  const { error, count } = await db
+  const { error, count } = await untyped(db)
     .from(def.table)
     .delete({ count: "exact" })
     .eq(primaryKeyOf(resourceKey), id);
@@ -111,10 +120,10 @@ export async function deleteRecord(db: Db, def: ResourceDefinition, resourceKey:
 export async function countRecords(
   db: Db,
   table: string,
-  build?: (q: ReturnType<Db["from"]>) => unknown,
+  build?: (q: any) => any,
 ): Promise<number> {
-  let query = db.from(table).select("*", { count: "exact", head: true });
-  if (build) query = build(query as never) as typeof query;
+  let query = untyped(db).from(table).select("*", { count: "exact", head: true });
+  if (build) query = build(query);
   const { count, error } = await query;
   if (error) throw fromDatabaseError(error);
   return count ?? 0;
