@@ -78,30 +78,42 @@ export const getMe = createServerFn({ method: "GET" })
 
 /* ------------------------------------------------------------------ generic resources */
 
+/** Rows are dynamic by design (declarative resource registry). */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Row = Record<string, any>;
+
 export const listResourceFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data: unknown) => listParamsSchema.parse(data))
   .handler(async ({ data, context: rpc }) => {
     const ctx = await context(rpc as never);
     const { resource, ...params } = data;
-    return listResource(ctx, resource, params);
+    const result = await listResource(ctx, resource, params);
+    return result as { rows: Row[]; total: number; page: number; pageSize: number };
   });
 
 export const getResourceFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data: unknown) => recordIdSchema.parse(data))
-  .handler(async ({ data, context: rpc }) => getResource(await context(rpc as never), data.resource, data.id));
+  .handler(
+    async ({ data, context: rpc }) =>
+      (await getResource(await context(rpc as never), data.resource, data.id)) as Row,
+  );
 
 export const createResourceFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data: unknown) => mutateSchema.parse(data))
-  .handler(async ({ data, context: rpc }) => createResource(await context(rpc as never), data.resource, data.values));
+  .handler(
+    async ({ data, context: rpc }) =>
+      (await createResource(await context(rpc as never), data.resource, data.values)) as Row,
+  );
 
 export const updateResourceFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data: unknown) => mutateSchema.extend({ id: z.string().min(1) }).parse(data))
-  .handler(async ({ data, context: rpc }) =>
-    updateResource(await context(rpc as never), data.resource, data.id, data.values),
+  .handler(
+    async ({ data, context: rpc }) =>
+      (await updateResource(await context(rpc as never), data.resource, data.id, data.values)) as Row,
   );
 
 export const deleteResourceFn = createServerFn({ method: "POST" })
