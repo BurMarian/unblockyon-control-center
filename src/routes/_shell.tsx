@@ -1,17 +1,10 @@
-import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
+import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { Topbar } from "@/components/topbar";
 import { Toaster } from "@/components/ui/sonner";
-import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_shell")({
-  ssr: false,
-  beforeLoad: async () => {
-    const { data, error } = await supabase.auth.getUser();
-    if (error || !data.user) throw redirect({ to: "/auth" });
-    return { user: data.user };
-  },
   component: ShellLayout,
 });
 
