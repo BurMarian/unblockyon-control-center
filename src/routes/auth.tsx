@@ -68,11 +68,6 @@ function AuthPage() {
     }
   }
 
-  async function google() {
-    const { lovable } = await import("@/integrations/lovable");
-    await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
-  }
-
   return (
     <div className="flex min-h-dvh items-center justify-center bg-muted/30 px-4">
       <div className="w-full max-w-sm rounded-xl border border-border bg-card p-8 shadow-[var(--shadow-card)]">
@@ -108,10 +103,6 @@ function AuthPage() {
             {busy ? "Please wait…" : mode === "signin" ? "Sign in" : "Create account"}
           </Button>
         </form>
-
-        <Button variant="outline" className="mt-3 w-full" onClick={() => void google()}>
-          Continue with Google
-        </Button>
 
         <button
           type="button"

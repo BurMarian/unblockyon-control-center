@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ShellRouteImport } from './routes/_shell'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ShellIndexRouteImport } from './routes/_shell.index'
 import { Route as ShellActivationsRouteImport } from './routes/_shell.activations'
 import { Route as ShellActivityLogsRouteImport } from './routes/_shell.activity-logs'
@@ -38,6 +39,11 @@ import { Route as ShellUsersUserIdRouteImport } from './routes/_shell.users.$use
 
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShellIndexRoute = ShellIndexRouteImport.update({
@@ -169,6 +175,7 @@ const ShellUsersUserIdRoute = ShellUsersUserIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof ShellIndexRoute
+  '/auth': typeof AuthRoute
   '/activations': typeof ShellActivationsRoute
   '/activity-logs': typeof ShellActivityLogsRoute
   '/error-logs': typeof ShellErrorLogsRoute
@@ -195,6 +202,7 @@ export interface FileRoutesByFullPath {
   '/users/': typeof ShellUsersIndexRoute
 }
 export interface FileRoutesByTo {
+  '/auth': typeof AuthRoute
   '/activations': typeof ShellActivationsRoute
   '/activity-logs': typeof ShellActivityLogsRoute
   '/error-logs': typeof ShellErrorLogsRoute
@@ -224,6 +232,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_shell': typeof ShellRouteWithChildren
+  '/auth': typeof AuthRoute
   '/_shell/activations': typeof ShellActivationsRoute
   '/_shell/activity-logs': typeof ShellActivityLogsRoute
   '/_shell/error-logs': typeof ShellErrorLogsRoute
@@ -254,6 +263,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/activations'
     | '/activity-logs'
     | '/error-logs'
@@ -280,6 +290,7 @@ export interface FileRouteTypes {
     | '/users/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/auth'
     | '/activations'
     | '/activity-logs'
     | '/error-logs'
@@ -308,6 +319,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_shell'
+    | '/auth'
     | '/_shell/activations'
     | '/_shell/activity-logs'
     | '/_shell/error-logs'
@@ -337,6 +349,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   ShellRoute: typeof ShellRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -346,6 +359,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof ShellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_shell/': {
@@ -586,6 +606,7 @@ const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   ShellRoute: ShellRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
